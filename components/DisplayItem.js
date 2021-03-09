@@ -2,10 +2,10 @@ import React from "react";
 
 import { View, Text, Button, FlatList, StyleSheet } from "react-native";
 
-const DisplayItem = ({ key, value }) => {
+const DisplayItem = ({ key, text }) => {
 	return (
 		<View style={styles.goalDisplay} key={key}>
-			<Text>{value}</Text>
+			<Text>{text}</Text>
 			<Button title="x" />
 		</View>
 	);

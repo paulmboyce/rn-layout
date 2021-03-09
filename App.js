@@ -20,7 +20,7 @@ export default function App() {
 		if (enteredGoal !== "") {
 			setGoals((current) => [
 				...current,
-				{ value: enteredGoal, id: Date.now().toString() },
+				{ goal: enteredGoal, id: Date.now().toString() },
 			]);
 		}
 	};
@@ -31,7 +31,7 @@ export default function App() {
 			<FlatList
 				data={goals}
 				renderItem={({ item }) => (
-					<DisplayItem key={item.key} value={item.value} />
+					<DisplayItem key={item.key} text={item.goal} />
 				)}
 			/>
 		</View>

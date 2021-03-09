@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
 		justifyContent: "space-between",
 		alignContent: "center",
 		marginTop: 40,
+		marginBottom: 10,
 	},
 	goalInput: {
 		padding: 10,
