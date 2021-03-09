@@ -11,7 +11,7 @@ import {
 } from "react-native";
 
 import InputButton from "./components/InputButton";
-import ListDisplay from "./components/ListDisplay";
+import DisplayItem from "./components/DisplayItem";
 
 export default function App() {
 	const [goals, setGoals] = useState([]);
@@ -28,7 +28,12 @@ export default function App() {
 	return (
 		<View style={styles.screen}>
 			<InputButton addGoalHandler={addGoalHandler} />
-			<ListDisplay goals={goals} />
+			<FlatList
+				data={goals}
+				renderItem={({ item }) => (
+					<DisplayItem key={item.key} value={item.value} />
+				)}
+			/>
 		</View>
 	);
 }

@@ -2,17 +2,13 @@ import React from "react";
 
 import { View, Text, Button, FlatList, StyleSheet } from "react-native";
 
-const ListDisplay = ({ goals }) => {
-	const renderItemData = (itemData) => {
-		return (
-			<View style={styles.goalDisplay} key={itemData.item.id}>
-				<Text>{itemData.item.value}</Text>
-				<Button title="x" />
-			</View>
-		);
-	};
-
-	return <FlatList data={goals} renderItem={renderItemData} />;
+const DisplayItem = ({ key, value }) => {
+	return (
+		<View style={styles.goalDisplay} key={key}>
+			<Text>{value}</Text>
+			<Button title="x" />
+		</View>
+	);
 };
 
 const styles = StyleSheet.create({
@@ -28,4 +24,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default ListDisplay;
+export default DisplayItem;
