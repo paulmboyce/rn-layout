@@ -11,16 +11,12 @@ import {
 } from "react-native";
 
 import InputButton from "./components/InputButton";
+import ListDisplay from "./components/ListDisplay";
 
 export default function App() {
-	const [enteredGoal, setEnteredGoal] = useState("");
 	const [goals, setGoals] = useState([]);
 
-	const goalInputHandler = (enteredText) => {
-		setEnteredGoal(enteredText);
-	};
-
-	const addGoalHandler = () => {
+	const addGoalHandler = (enteredGoal) => {
 		if (enteredGoal !== "") {
 			setGoals((current) => [
 				...current,
@@ -29,27 +25,10 @@ export default function App() {
 		}
 	};
 
-	const renderItemData = (itemData) => {
-		return (
-			<View style={styles.goalDisplay} key={itemData.item.id}>
-				<Text>{itemData.item.value}</Text>
-				<Button title="x" />
-			</View>
-		);
-	};
-
 	return (
 		<View style={styles.screen}>
-			<View style={styles.enterGoal}>
-				<TextInput
-					placeholder="Enter a goal"
-					style={styles.goalInput}
-					value={enteredGoal}
-					onChangeText={goalInputHandler}
-				></TextInput>
-				<Button title="ADD" onPress={addGoalHandler} />
-			</View>
-			<FlatList data={goals} renderItem={renderItemData} />
+			<InputButton addGoalHandler={addGoalHandler} />
+			<ListDisplay goals={goals} />
 		</View>
 	);
 }
@@ -59,30 +38,5 @@ const styles = StyleSheet.create({
 		flex: 1,
 		padding: 50,
 		backgroundColor: "beige",
-	},
-
-	enterGoal: {
-		flexDirection: "row",
-		justifyContent: "space-between",
-		alignContent: "center",
-		marginTop: 40,
-	},
-
-	goalInput: {
-		padding: 10,
-		borderColor: "black",
-		borderWidth: 0.5,
-		flex: 1,
-	},
-
-	goalDisplay: {
-		flexDirection: "row",
-		justifyContent: "flex-end",
-		alignItems: "center",
-		paddingHorizontal: 45,
-		backgroundColor: "white",
-		borderColor: "black",
-		borderWidth: 0.5,
-		marginVertical: 3,
 	},
 });
