@@ -1,13 +1,21 @@
 import React from "react";
 
-import { View, Text, Button, FlatList, StyleSheet } from "react-native";
+import {
+	View,
+	Text,
+	Button,
+	FlatList,
+	StyleSheet,
+	TouchableOpacity,
+} from "react-native";
 
-const DisplayItem = ({ key, text }) => {
+const DisplayItem = ({ id, text, onPress }) => {
 	return (
-		<View style={styles.goalDisplay} key={key}>
-			<Text>{text}</Text>
-			<Button title="x" />
-		</View>
+		<TouchableOpacity onPress={onPress.bind(this, id)}>
+			<View style={styles.goalDisplay} key={id}>
+				<Text>{text}</Text>
+			</View>
+		</TouchableOpacity>
 	);
 };
 
@@ -21,6 +29,7 @@ const styles = StyleSheet.create({
 		borderColor: "black",
 		borderWidth: 0.5,
 		marginVertical: 3,
+		minHeight: 40,
 	},
 });
 

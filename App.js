@@ -25,13 +25,18 @@ export default function App() {
 		}
 	};
 
+	const deleteGoal = (id) => {
+		console.log("Lets DELETE: ", id);
+		setGoals(goals.filter((goal) => goal.id !== id));
+	};
+
 	return (
 		<View style={styles.screen}>
 			<InputButton submitInput={addGoalHandler} placeholder="Enter any goal" />
 			<FlatList
 				data={goals}
 				renderItem={({ item }) => (
-					<DisplayItem key={item.key} text={item.goal} />
+					<DisplayItem id={item.id} text={item.goal} onPress={deleteGoal} />
 				)}
 			/>
 		</View>
