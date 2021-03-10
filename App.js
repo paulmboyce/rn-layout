@@ -26,8 +26,7 @@ export default function App() {
 	};
 
 	const deleteGoal = (id) => {
-		console.log("Lets DELETE: ", id);
-		setGoals(goals.filter((goal) => goal.id !== id));
+		setGoals((current) => current.filter((goal) => goal.id !== id));
 	};
 
 	return (
