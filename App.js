@@ -27,7 +27,7 @@ export default function App() {
 
 	return (
 		<View style={styles.screen}>
-			<InputButton addGoalHandler={addGoalHandler} />
+			<InputButton submitInput={addGoalHandler} placeholder="Enter any goal" />
 			<FlatList
 				data={goals}
 				renderItem={({ item }) => (
