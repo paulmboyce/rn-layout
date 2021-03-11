@@ -8,6 +8,8 @@ import {
 	Platform,
 } from "react-native";
 
+import StyledButton from "./StyledButton";
+
 const InputButton = (props) => {
 	const { submitInput, placeholder, layout, cancel, onCancel } = props;
 	const [inputText, setInputText] = useState("");
@@ -27,21 +29,23 @@ const InputButton = (props) => {
 				value={inputText}
 				onChangeText={changeTextHandler}
 			></TextInput>
-			<View style={{ marginTop: 5 }}>
-				<Button
-					title="ADD"
-					onPress={() => {
-						submitInput(inputText);
-						setInputText("");
-					}}
-				/>
-			</View>
+			<StyledButton
+				style={{ marginTop: 5 }}
+				title="ADD"
+				onPress={() => {
+					submitInput(inputText);
+					setInputText("");
+				}}
+			/>
 			{(() => {
 				if (cancelButton) {
 					return (
-						<View style={{ marginTop: 5 }}>
-							<Button title="CANCEL" color="grey" onPress={onCancel} />
-						</View>
+						<StyledButton
+							style={{ marginTop: 5 }}
+							title="CANCEL"
+							color="grey"
+							onPress={onCancel}
+						/>
 					);
 				}
 			})()}
