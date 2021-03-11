@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { View, TextInput, Button, StyleSheet, Dimensions } from "react-native";
 
-const InputButton = ({ submitInput, placeholder, layout }) => {
+const InputButton = (props) => {
+	const { submitInput, placeholder, layout } = props;
 	const [inputText, setInputText] = useState("");
 
 	const flexDirection = layout ? layout : "row";

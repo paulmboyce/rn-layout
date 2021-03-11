@@ -4,19 +4,14 @@ import { StyleSheet, Modal, View, Button } from "react-native";
 import InputButton from "./InputButton";
 
 const InputButtonModal = (props) => {
-	console.log("PROPS: ", props);
-	const { switchAddMode, isAddMode, submitInput, placeholder } = props;
+	const { switchAddMode, isAddMode } = props;
 
 	return (
 		<View>
 			<Button title="Add Goal" onPress={switchAddMode} />
 			<Modal visible={isAddMode} animationType="slide">
 				<View style={styles.modal}>
-					<InputButton
-						submitInput={submitInput}
-						placeholder={placeholder}
-						layout="column"
-					/>
+					<InputButton {...props} layout="column" />
 				</View>
 			</Modal>
 		</View>
