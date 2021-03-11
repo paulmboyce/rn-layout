@@ -36,14 +36,19 @@ const InputButton = (props) => {
 
 	const renderDeleteButton = () => {
 		return (
-			<StyledButton
-				style={styles.styledButton}
-				title="CANCEL"
-				color="grey"
-				onPress={onCancel}
-			/>
+			cancelButton && (
+				<StyledButton
+					style={styles.styledButton}
+					title="CANCEL"
+					color="grey"
+					onPress={onCancel}
+				/>
+			)
 		);
 	};
+
+	const cancelViewStyle = cancelButton ? styles.row : {};
+
 	return (
 		<View style={{ ...styles.container, flexDirection: flexDirection }}>
 			<TextInput
@@ -53,18 +58,8 @@ const InputButton = (props) => {
 				onChangeText={changeTextHandler}
 			></TextInput>
 
-			<View
-				style={(() => {
-					if (cancelButton) {
-						return { flexDirection: "row", justifyContent: "center" };
-					}
-				})()}
-			>
-				{(() => {
-					if (cancelButton) {
-						return renderDeleteButton();
-					}
-				})()}
+			<View style={cancelViewStyle}>
+				{renderDeleteButton()}
 				{renderAddButton()}
 			</View>
 		</View>
