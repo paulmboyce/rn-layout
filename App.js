@@ -40,26 +40,24 @@ export default function App() {
 		setIsAddMode((current) => !current);
 	};
 
+	const baseInputProps = {
+		submitInput: addGoalHandler,
+		placeholder: "Enter any goal",
+	};
+
 	return (
 		<View style={styles.screen}>
 			{(() => {
 				if (Platform.OS !== "web") {
 					return (
 						<InputButtonModal
+							{...baseInputProps}
 							switchAddMode={switchAddMode}
 							isAddMode={isAddMode}
-							submitInput={addGoalHandler}
-							placeholder="Enter any goal"
-						/>
-					);
-				} else {
-					return (
-						<InputButton
-							submitInput={addGoalHandler}
-							placeholder="Enter any goal"
 						/>
 					);
 				}
+				return <InputButton {...baseInputProps} />;
 			})()}
 
 			<FlatList
