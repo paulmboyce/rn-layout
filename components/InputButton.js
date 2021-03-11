@@ -21,6 +21,29 @@ const InputButton = (props) => {
 		setInputText(enteredText);
 	};
 
+	const renderAddButton = () => {
+		return (
+			<StyledButton
+				style={styles.styledButton}
+				title="ADD"
+				onPress={() => {
+					submitInput(inputText);
+					setInputText("");
+				}}
+			/>
+		);
+	};
+
+	const renderDeleteButton = () => {
+		return (
+			<StyledButton
+				style={styles.styledButton}
+				title="CANCEL"
+				color="grey"
+				onPress={onCancel}
+			/>
+		);
+	};
 	return (
 		<View style={{ ...styles.container, flexDirection: flexDirection }}>
 			<TextInput
@@ -29,26 +52,21 @@ const InputButton = (props) => {
 				value={inputText}
 				onChangeText={changeTextHandler}
 			></TextInput>
-			<StyledButton
-				style={{ marginTop: 5 }}
-				title="ADD"
-				onPress={() => {
-					submitInput(inputText);
-					setInputText("");
-				}}
-			/>
-			{(() => {
-				if (cancelButton) {
-					return (
-						<StyledButton
-							style={{ marginTop: 5 }}
-							title="CANCEL"
-							color="grey"
-							onPress={onCancel}
-						/>
-					);
-				}
-			})()}
+
+			<View
+				style={(() => {
+					if (cancelButton) {
+						return { flexDirection: "row", justifyContent: "center" };
+					}
+				})()}
+			>
+				{(() => {
+					if (cancelButton) {
+						return renderDeleteButton();
+					}
+				})()}
+				{renderAddButton()}
+			</View>
 		</View>
 	);
 };
@@ -65,6 +83,12 @@ const styles = StyleSheet.create({
 		borderWidth: 0.5,
 		minWidth: Dimensions.get("window").width * 0.6,
 	},
+	styledButton: {
+		flex: 1,
+		marginTop: 5,
+		marginHorizontal: 2,
+	},
+	row: { flexDirection: "row", justifyContent: "center" },
 });
 
 export default InputButton;
