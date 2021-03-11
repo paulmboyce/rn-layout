@@ -11,7 +11,7 @@ const InputButtonModal = (props) => {
 			<Button title="Add Goal" onPress={switchAddMode} />
 			<Modal visible={isAddMode} animationType="slide">
 				<View style={styles.modal}>
-					<InputButton {...props} layout="column" />
+					<InputButton {...props} layout="column" cancel={true} />
 				</View>
 			</Modal>
 		</View>

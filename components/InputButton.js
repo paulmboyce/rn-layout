@@ -1,11 +1,19 @@
 import React, { useState } from "react";
-import { View, TextInput, Button, StyleSheet, Dimensions } from "react-native";
+import {
+	View,
+	TextInput,
+	Button,
+	StyleSheet,
+	Dimensions,
+	Platform,
+} from "react-native";
 
 const InputButton = (props) => {
-	const { submitInput, placeholder, layout } = props;
+	const { submitInput, placeholder, layout, cancel, onCancel } = props;
 	const [inputText, setInputText] = useState("");
 
 	const flexDirection = layout ? layout : "row";
+	const cancelButton = cancel ? cancel : false;
 
 	const changeTextHandler = (enteredText) => {
 		setInputText(enteredText);
@@ -19,12 +27,24 @@ const InputButton = (props) => {
 				value={inputText}
 				onChangeText={changeTextHandler}
 			></TextInput>
-			<Button
-				title="ADD"
-				onPress={() => {
-					submitInput(inputText);
-				}}
-			/>
+			<View style={{ marginTop: 5 }}>
+				<Button
+					title="ADD"
+					onPress={() => {
+						submitInput(inputText);
+						setInputText("");
+					}}
+				/>
+			</View>
+			{(() => {
+				if (cancelButton) {
+					return (
+						<View style={{ marginTop: 5 }}>
+							<Button title="CANCEL" color="grey" onPress={onCancel} />
+						</View>
+					);
+				}
+			})()}
 		</View>
 	);
 };

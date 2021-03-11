@@ -32,6 +32,10 @@ export default function App() {
 		}
 	};
 
+	const cancelHandler = () => {
+		setIsAddMode(false);
+	};
+
 	const deleteGoal = (id) => {
 		setGoals((current) => current.filter((goal) => goal.id !== id));
 	};
@@ -42,6 +46,7 @@ export default function App() {
 
 	const baseInputProps = {
 		submitInput: addGoalHandler,
+		onCancel: cancelHandler,
 		placeholder: "Enter any goal",
 	};
 
