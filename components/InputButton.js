@@ -1,15 +1,17 @@
 import React, { useState } from "react";
-import { View, TextInput, Button, StyleSheet } from "react-native";
+import { View, TextInput, Button, StyleSheet, Dimensions } from "react-native";
 
-const InputButton = ({ submitInput, placeholder }) => {
+const InputButton = ({ submitInput, placeholder, layout }) => {
 	const [inputText, setInputText] = useState("");
+
+	const flexDirection = layout ? layout : "row";
 
 	const changeTextHandler = (enteredText) => {
 		setInputText(enteredText);
 	};
 
 	return (
-		<View style={styles.container}>
+		<View style={{ ...styles.container, flexDirection: flexDirection }}>
 			<TextInput
 				placeholder={placeholder}
 				style={styles.input}
@@ -28,9 +30,7 @@ const InputButton = ({ submitInput, placeholder }) => {
 
 const styles = StyleSheet.create({
 	container: {
-		flexDirection: "row",
-		justifyContent: "space-between",
-		alignContent: "center",
+		justifyContent: "center",
 		marginTop: 40,
 		marginBottom: 10,
 	},
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
 		padding: 10,
 		borderColor: "black",
 		borderWidth: 0.5,
-		flex: 1,
+		minWidth: Dimensions.get("window").width * 0.6,
 	},
 });
 
