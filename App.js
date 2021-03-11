@@ -14,6 +14,9 @@ import InputButton from "./components/InputButton";
 import DisplayItem from "./components/DisplayItem";
 import InputButtonModal from "./components/InputButtonModal";
 
+const isNative = Platform.OS.match(/^(IOS|ANDROID|NATIVE)$/i);
+const isWeb = !isNative;
+
 // MODAL for WEB:
 // Modal for Web (not in current react natve web):
 // SEE: https://www.npmjs.com/package/modal-react-native-web
@@ -50,32 +53,29 @@ export default function App() {
 		placeholder: "Enter any goal",
 	};
 
+	const renderInputFields = () => {
+		if (isNative) {
+			return (
+				<InputButtonModal
+					{...baseInputProps}
+					switchAddMode={switchAddMode}
+					isAddMode={isAddMode}
+				/>
+			);
+		}
+		return <InputButton {...baseInputProps} />;
+	};
+
 	return (
 		<View style={styles.screen}>
-			{(() => {
-				if (Platform.OS !== "web") {
-					return (
-						<InputButtonModal
-							{...baseInputProps}
-							switchAddMode={switchAddMode}
-							isAddMode={isAddMode}
-						/>
-					);
-				}
-				return <InputButton {...baseInputProps} />;
-			})()}
-
+			{renderInputFields()}
 			<FlatList
 				data={goals}
 				renderItem={({ item }) => (
 					<DisplayItem id={item.id} text={item.goal} onPress={deleteGoal} />
 				)}
 			/>
-			{(() => {
-				if (Platform.OS !== "web") {
-					return <Text>Platform is: {Platform.OS}</Text>;
-				}
-			})()}
+			<Text>Platform is: {Platform.OS}</Text>
 		</View>
 	);
 }
